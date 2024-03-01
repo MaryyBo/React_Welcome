@@ -1,14 +1,17 @@
 //REACT - бібліотека для створення користувацьких інтерфейсів
 
-console.log(React);
+class HeaderComponent extends React.Component { // клас це компонент
+    render() {//єдиний метод який ми зобов'язані визначити в класі
+        const p = React.createElement('p', {}, 'Super paragraph');
+        const h2 = React.createElement('h2', {title: 'Hi'},'Header');
+        const article = React.createElement('article', {}, h2, p);
+        return article; //метод render  - це ОБОВʼЯЗКОВО!!! прописуємо те, яку верстку поверне нам компонента
+    }
+}
+
+const component = React.createElement(HeaderComponent);
+
 
 const root = document.querySelector('#root');
-const h1 = React.createElement('h1',{},'Hello React'); // React-element
-console.log(h1);
 
-console.log(ReactDOM);
-
-const anotherH1 = document.createElement('h1'); // HTML-element
-console.dir(anotherH1);
-
-ReactDOM.render(h1, root);
+ReactDOM.render(component, root);
