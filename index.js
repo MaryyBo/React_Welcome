@@ -16,24 +16,50 @@ class Counter extends React.Component {
     constructor(props) {
         super(props); //передати props батьківському класу React.Component 
         this.state = { // state - це стан нашого додатку
-            count: 0
+            count: 0,
+            step: 7
         }
+
+
     }
 
+    increment5() {
+        //to do: state.count++;
+        // console.log('click');// щоб побачити в консолі, перевірка
+
+        this.setState({ //треба взяти функцію з React.Component
+            count: this.state.count + this.state.step
+        })
+
+    }
     increment() {
         //to do: state.count++;
         // console.log('click');// щоб побачити в консолі, перевірка
 
-       this.setState({ //треба взяти функцію з React.Component
-        count: this.state.count + 1
-       }) 
+        this.setState({ //треба взяти функцію з React.Component
+            count: this.state.count + 1
+        })
 
     }
 
+    decrement() {
+        if (this.state.count > 0) {
+            this.setState({
+                count: this.state.count - 1
+            });
+        } else {
+            alert('Лічильник не опускається нижче 0')
+        }
+    }
+
     render() {
-        const h2 = React.createElement('h2', {}, this.state.count);
-        const button = React.createElement('button', {onClick: () => {this.increment()}}, '+'); // в якості this тут Counter, тому тут завжди буде СТРІЛКОВА ФУНКЦІЯ
-        return React.createElement(React.Fragment, {}, h2, button);;
+        const counter = React.createElement('h2', {}, `Значення лічильника:${this.state.count}`);
+        const step = React.createElement('h2', {}, `Значення кроку:${this.state.step}`);
+
+        const buttonIncrement = React.createElement('button', { onClick: () => { this.increment() } }, '+');
+        const buttonDecrement = React.createElement('button', { onClick: () => { this.decrement() } }, '-');
+        const increment5 = React.createElement('button', { onClick: () => { this.increment5() } }, '+5');
+        return React.createElement(React.Fragment, {}, counter, step, buttonIncrement, buttonDecrement, increment5);;
     }
 
 }
